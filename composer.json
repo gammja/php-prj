@@ -3,6 +3,9 @@
   "description": "Vulnerable Web Applications",
   "minimum-stability": "beta",
   "license": "proprietary",
+  "autoload": {
+    "psr-0": {"": "src/"}
+  },
   "config": {
     "bin-dir": "bin"
   }
