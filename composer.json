@@ -1,0 +1,9 @@
+{
+  "name": "sprudnikov/php_prj",
+  "description": "Vulnerable Web Applications",
+  "minimum-stability": "beta",
+  "license": "proprietary",
+  "config": {
+    "bin-dir": "bin"
+  }
+}
