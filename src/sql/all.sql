@@ -35,9 +35,14 @@ CREATE TABLE `php-prj`.`payments` (
   PRIMARY KEY (`id`),
   INDEX `from_idx` (`from_acc` ASC),
   INDEX `to_idx` (`to_acc` ASC),
-  CONSTRAINT `payments_accounts`
-    FOREIGN KEY (`from_acc`, `to_acc`)
-    REFERENCES `php-prj`.`acconts` (`acc_num`, `acc_num`)
+  CONSTRAINT `payments_accounts_to`
+    FOREIGN KEY (`from_acc`)
+    REFERENCES `php-prj`.`acconts` (`acc_num`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `payments_accounts_from`
+    FOREIGN KEY (`to_acc`)
+    REFERENCES `php-prj`.`acconts` (`acc_num`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
