@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP Application</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/application.css">
+</head>
+<body>
+<div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container">
+            <a href="#" class="brand">PHP Application</a>
+            <ul class="nav pull-left">
+                <li><a href="#">Users</a></li>
+                <li><a href="#">Add user</a></li>
+            </ul>
+            <ul class="nav pull-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown" data-toggle="dropdown">%UserName%[%Role%] <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Change password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h1>Users</h1>
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><a href="#">admin</a></td>
+            <td>admin@test.com</td>
+            <td>None</td>
+            <td>None</td>
+            <td>[ROLE_ADMIN]</td>
+        </tr>
+        <tr>
+            <td><a href="#">user</a></td>
+            <td>user@test.com</td>
+            <td>None</td>
+            <td>None</td>
+            <td>[ROLE_USER]</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
