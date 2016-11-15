@@ -31,6 +31,11 @@
 <div class="container">
     <form class="form-new-account">
         <h2 class="form-new-account-heading text-center">Create new account</h2>
+        <div class="alert alert-error">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Account Number is invalid.</strong> Please specify exactly 16 digits.
+            All numerical, no spaces or dashes.
+        </div>
         <input name="account" type="text" class="input-block-level" placeholder="Primary Account Number*" >
         <textarea name="description" class="input-block-level" rows="6" placeholder="Description"></textarea>
         <button class="btn btn-large btn-block btn-primary" type="submit">Create</button>
