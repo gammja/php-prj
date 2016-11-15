@@ -12,8 +12,8 @@
         <div class="container">
             <a href="#" class="brand">PHP Application</a>
             <ul class="nav pull-left">
-                <li><a href="#">My Accounts</a></li>
-                <li><a href="#">My Transactions</a></li>
+                <li><a href="accounts.html">My Accounts</a></li>
+                <li><a href="transactions.html">My Transactions</a></li>
             </ul>
             <ul class="nav pull-right">
                 <li class="dropdown">
@@ -21,7 +21,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">Change password</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="sign-in.html">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -29,13 +29,13 @@
     </div>
 </div>
 <div class="container">
-    <h1>Accounts of %UserName%</h1>
+    <h1>Accounts</h1>
     <div class="alert alert-success">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong>Well done!</strong> New account has been successfully created.
     </div>
     <div>
-        <button class="btn btn-primary" type="button">Create new account</button>
+        <a href="#create-new-account" class="btn btn-primary" data-toggle="modal">Create new account</a>
     </div>
     <br>
     <table class="table table-bordered table-striped table-hover">
@@ -47,19 +47,39 @@
         </thead>
         <tbody>
         <tr>
-            <td><a href="#">12345*******3456</a></td>
+            <td><a href="transactions.html">12345*******3456</a></td>
             <td>My first account</td>
         </tr>
         <tr>
-            <td><a href="#">55245*******6754</a></td>
+            <td><a href="transactions.html">55245*******6754</a></td>
             <td>My second account</td>
         </tr>
         <tr>
-            <td><a href="#">55245*******6754</a></td>
+            <td><a href="transactions.html">55245*******6754</a></td>
             <td>My second account</td>
         </tr>
         </tbody>
     </table>
+</div>
+<div id="create-new-account" class="modal hide fade">
+    <div class="modal-header">
+        <button href="#" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="text-center">Create new account</h2>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="alert alert-error">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Account Number is invalid.</strong> Please specify exactly 16 digits.
+                All numerical, no spaces or dashes.
+            </div>
+            <input name="account" type="text" class="input-block-level" placeholder="Primary Account Number*">
+            <textarea name="description" class="input-block-level" rows="6" placeholder="Description"></textarea>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-large btn-block btn-primary" type="submit">Create</button>
+    </div>
 </div>
 <script src="js/jquery-1.12.4.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
