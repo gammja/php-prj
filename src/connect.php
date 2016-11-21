@@ -1,9 +1,9 @@
 <?php
 
-$host = "127.0.0.1";
-$port = 60000;
+$host = "192.168.99.100";
+$port = 32770;
 $user = "root";
-$password = "pwd";
+$password = "";
 $dbname = "php-prj";
 
 $con = mysqli_connect($host, $user, $password, $dbname, $port)

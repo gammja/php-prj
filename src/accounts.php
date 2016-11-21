@@ -1,3 +1,7 @@
+<?php
+$userId = empty($_GET['username']) ? 2 : 3;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +16,8 @@
         <div class="container">
             <a href="#" class="brand">PHP Application</a>
             <ul class="nav pull-left">
-                <li><a href="accounts.html">My Accounts</a></li>
-                <li><a href="transactions.html">My Transactions</a></li>
+                <li><a href="accounts.php?username=<?php echo $_GET['username'] ?>">My Accounts</a></li>
+                <li><a href="transactions.php?id=<?php echo $userId ?>">My Transactions</a></li>
             </ul>
             <ul class="nav pull-right">
                 <li class="dropdown">
@@ -21,7 +25,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">Change password</a></li>
                         <li class="divider"></li>
-                        <li><a href="sign-in.html">Logout</a></li>
+                        <li><a href="sign-in.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -48,27 +52,17 @@
         <tbody>
         <?php
         include('connect.php');
-        $userId = 2;
-//        $query = "SELECT acc_num, description FROM `php-prj`.accounts WHERE user_id = $userId";
-//        $res = mysqli_query($con, $query);
-//        while ($row = mysqli_fetch_assoc()){
-//            echo "<tr><td>" . $row['acc_num'] . "</td><td>". $row['description']."</td></tr>";
-//        }
+        include('helpers.php');
 
-//        mysqli_close($con);
+        $query = "SELECT acc_num, description FROM `php-prj`.accounts WHERE user_id = $userId";
+        $res = mysqli_query($con, $query);
+        while ($row = mysqli_fetch_assoc($res)) {
+            echo "<tr><td><a href='transactions.php?id=" . $row['acc_num'] . "'>" . mask($row['acc_num'])
+                . "</td><td>" . $row['description'] . "</td></tr>";
+        }
+
+        mysqli_close($con);
         ?>
-        <tr>
-            <td><a href="transactions.html">12345*******3456</a></td>
-            <td>My first account</td>
-        </tr>
-        <tr>
-            <td><a href="transactions.html">55245*******6754</a></td>
-            <td>My second account</td>
-        </tr>
-        <tr>
-            <td><a href="transactions.html">55245*******6754</a></td>
-            <td>My second account</td>
-        </tr>
         </tbody>
     </table>
 </div>

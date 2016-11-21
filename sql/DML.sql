@@ -12,7 +12,7 @@ INSERT INTO `php-prj`.`authorities` (`user_id`, `role_id`) VALUES (3, 2);
 
 INSERT INTO `php-prj`.`accounts` (`id`, `acc_num`, `description`, `user_id`) VALUES (1, '9784543829216754', 'description_1', 2);
 INSERT INTO `php-prj`.`accounts` (`id`, `acc_num`, `description`, `user_id`) VALUES (2, '1234534859203456', 'description_2', 2);
-INSERT INTO `php-prj`.`accounts` (`id`, `acc_num`, `description`, `user_id`) VALUES (3, '5524550248496754', 'description_3', 3);
+INSERT INTO `php-prj`.`accounts` (`id`, `acc_num`, `description`, `user_id`) VALUES (3, '5524550248494633', 'description_3', 3);
 INSERT INTO `php-prj`.`accounts` (`id`, `acc_num`, `description`, `user_id`) VALUES (4, '1155744622468832', 'description_4', 3);
 
 INSERT INTO `php-prj`.`payments` (from_acc, to_acc, payment_time, amount, description, status) VALUES ('9784543829216754', '5524550248496754', now(), 10000, 'description_1', 1);
