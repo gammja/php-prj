@@ -57,8 +57,13 @@ $userId = empty($_GET['username']) ? 2 : 3;
         $query = "SELECT acc_num, description FROM `php-prj`.accounts WHERE user_id = $userId";
         $res = mysqli_query($con, $query);
         while ($row = mysqli_fetch_assoc($res)) {
-            echo "<tr><td><a href='transactions.php?id=" . $row['acc_num'] . "'>" . mask($row['acc_num'])
-                . "</td><td>" . $row['description'] . "</td></tr>";
+            $account = $row['acc_num'];
+            $maskedAccount = mask($account);
+            $description = $row['description'];
+            echo "<tr>"
+                . "<td><a href='transactions.php?id=$account'>$maskedAccount</a></td>"
+                . "<td>$description</td>"
+                . "</tr>";
         }
 
         mysqli_close($con);
