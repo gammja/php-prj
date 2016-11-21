@@ -1,7 +1,7 @@
 CREATE SCHEMA `php-prj` DEFAULT CHARACTER SET utf8 ;
 
 CREATE TABLE `php-prj`.`users` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(50) NOT NULL,
   `password` VARCHAR(50) NOT NULL,
   `email` VARCHAR(50) NOT NULL,
@@ -10,24 +10,24 @@ CREATE TABLE `php-prj`.`users` (
   `last_name` VARCHAR(50) NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `php-prj`.`acconts` (
-  `id` INT NOT NULL,
-  `acc_num` INT NOT NULL,
+CREATE TABLE `php-prj`.`accounts` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `acc_num` VARCHAR(16) NOT NULL,
   `description` VARCHAR(200) NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `user_id_idx` (`user_id` ASC),
   UNIQUE INDEX `acc_num_UNIQUE` (`acc_num` ASC),
-  CONSTRAINT `acconts_users`
+  CONSTRAINT `accounts_users`
     FOREIGN KEY (`user_id`)
     REFERENCES `php-prj`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 CREATE TABLE `php-prj`.`payments` (
-  `id` INT NOT NULL,
-  `from_acc` INT NOT NULL,
-  `to_acc` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `from_acc` VARCHAR(16) NOT NULL,
+  `to_acc` VARCHAR(16) NOT NULL,
   `payment_time` DATETIME NOT NULL,
   `amount` INT NOT NULL,
   `description` VARCHAR(200) NULL,
@@ -37,17 +37,17 @@ CREATE TABLE `php-prj`.`payments` (
   INDEX `to_idx` (`to_acc` ASC),
   CONSTRAINT `payments_accounts_to`
     FOREIGN KEY (`from_acc`)
-    REFERENCES `php-prj`.`acconts` (`acc_num`)
+    REFERENCES `php-prj`.accounts (`acc_num`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `payments_accounts_from`
     FOREIGN KEY (`to_acc`)
-    REFERENCES `php-prj`.`acconts` (`acc_num`)
+    REFERENCES `php-prj`.accounts (`acc_num`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 CREATE TABLE `php-prj`.`roles` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `description` VARCHAR(200) NULL,
   PRIMARY KEY (`id`));
