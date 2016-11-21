@@ -47,6 +47,7 @@
 
         include('connect.php');
         include('helpers.php');
+
         $acc = $_GET['id'];
         $query = "SELECT from_acc, to_acc, payment_time, amount, description, status FROM `php-prj`.payments WHERE from_acc = $acc";
         $res = mysqli_query($con, $query);
