@@ -47,7 +47,15 @@
         </thead>
         <tbody>
         <?php
+        include('connect.php');
+        $userId = 2;
+//        $query = "SELECT acc_num, description FROM `php-prj`.accounts WHERE user_id = $userId";
+//        $res = mysqli_query($con, $query);
+//        while ($row = mysqli_fetch_assoc()){
+//            echo "<tr><td>" . $row['acc_num'] . "</td><td>". $row['description']."</td></tr>";
+//        }
 
+//        mysqli_close($con);
         ?>
         <tr>
             <td><a href="transactions.html">12345*******3456</a></td>
