@@ -42,22 +42,34 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td><a href="#">12345*******3456</a></td>
-            <td>Food</td>
-            <td>100</td>
-            <td>23115*******6753</td>
-            <td>11.11.2016</td>
-            <td>Done</td>
-        </tr>
-        <tr>
-            <td><a href="#">55245*******6754</a></td>
-            <td>Phone</td>
-            <td>10000</td>
-            <td>44223*******5732</td>
-            <td>12.11.2016</td>
-            <td>In progress</td>
-        </tr>
+        <?php
+        date_default_timezone_set('UTC');
+
+        include('connect.php');
+        include('helpers.php');
+        $acc = $_GET['id'];
+        $query = "SELECT from_acc, to_acc, payment_time, amount, description, status FROM `php-prj`.payments WHERE from_acc = $acc";
+        $res = mysqli_query($con, $query);
+        while ($row = mysqli_fetch_assoc($res)) {
+            $account = $row['to_acc'];
+            $maskedAccount = mask($account);
+            $description = $row['description'];
+            $amount = $row['amount'];
+            $destination = mask($row['amount']);
+            $date = date('d.m.Y', strtotime($row['payment_time']));
+            $status = $row['status'] == 1 ? "Done" : "In progress";
+            echo "<tr>"
+                . "<td><a href='accounts.php?acc='$account'>$maskedAccount</a></td>"
+                . "<td>$description</td>"
+                . "<td>$amount</td>"
+                . "<td>$destination</td>"
+                . "<td>$date</td>"
+                . "<td>$status</td>"
+                . "</tr>";
+        }
+
+        mysqli_close($con);
+        ?>
         </tbody>
     </table>
 </div>
