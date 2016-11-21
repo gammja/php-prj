@@ -1,5 +1,5 @@
 <?php
-$userId = empty($_GET['username']) ? 2 : 3;
+$userId = isset($_GET['uid']) ? $_GET['uid'] : 3;
 ?>
 
 <!DOCTYPE html>
