@@ -42,7 +42,6 @@
         <tbody>
         <?php
         include('connect.php');
-        include('helpers.php');
 
         $query = "SELECT
                       u.id AS userid,
