@@ -22,6 +22,10 @@ if (isset($_POST['username'])) {
         $_SESSION['roleName'] = $row['roleName'];
         $_SESSION['userName'] = $row['username'];
         $_SESSION['userId'] = $row['id'];
+        if ($_POST['keep']) {
+            $_SESSION['keep'] = true;
+        }
+
         $url = $row['role'] == 1 ? "admin.php" : "accounts.php?uid=" . $row['id'];
         header("Location: $url");
     } else {
@@ -61,7 +65,7 @@ if (isset($_POST['username'])) {
         <div class="row-fluid">
             <div class="span5">
                 <label class="checkbox">
-                    <input name="remember-me" type="checkbox" value="remember-me"> Keep me logged in
+                    <input name="keep" type="checkbox" value="keep"> Keep me logged in
                 </label>
                 <div class="row-fluid">
                     <div class="span11 offset1">
