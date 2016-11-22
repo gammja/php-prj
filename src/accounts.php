@@ -1,5 +1,28 @@
 <?php
-$userId = isset($_GET['uid']) ? $_GET['uid'] : 3;
+
+if (!isset($_GET['uid'])) {
+    header('Location: sign-in.php');
+    exit();
+}
+
+$userId = $_GET['uid'];
+include_once('connect.php');
+
+$query = "SELECT
+              u.username,
+              r.name AS role
+            FROM `php-prj`.users u
+              JOIN `php-prj`.authorities a ON u.id = a.user_id
+              JOIN `php-prj`.roles r ON a.role_id = r.id
+            WHERE u.id = $userId";
+$res = mysqli_query($con, $query);
+if ($row = mysqli_fetch_assoc($res)){
+    $userName = $row['username'];
+    $role = strtoupper($row['role']);
+} else {
+    header('Location: sign-in.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,16 +39,16 @@ $userId = isset($_GET['uid']) ? $_GET['uid'] : 3;
         <div class="container">
             <a href="#" class="brand">PHP Application</a>
             <ul class="nav pull-left">
-                <li><a href="accounts.php?username=<?php echo $_GET['username'] ?>">My Accounts</a></li>
+                <li><a href="accounts.php?uid=<?php echo $userId ?>">My Accounts</a></li>
                 <li><a href="transactions.php?id=<?php echo $userId ?>">My Transactions</a></li>
             </ul>
             <ul class="nav pull-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown" data-toggle="dropdown">%UserName%[%Role%] <b class="caret"></b></a>
+                    <a href="#" class="dropdown" data-toggle="dropdown"><?php echo "$userName [$role]"?><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Change password</a></li>
                         <li class="divider"></li>
-                        <li><a href="sign-in.php">Logout</a></li>
+                        <li><a href="logout.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -51,8 +74,8 @@ $userId = isset($_GET['uid']) ? $_GET['uid'] : 3;
         </thead>
         <tbody>
         <?php
-        include('connect.php');
-        include('helpers.php');
+        include_once('connect.php');
+        include_once('helpers.php');
 
         $query = "SELECT acc_num, description FROM `php-prj`.accounts WHERE user_id = $userId";
         $res = mysqli_query($con, $query);
