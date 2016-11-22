@@ -8,6 +8,7 @@ if (isset($_POST['username'])) {
 
     $query = "SELECT
                   u.id,
+                  u.username,
                   r.id AS role,
                   r.name AS roleName
                 FROM `php-prj`.users u
@@ -19,7 +20,7 @@ if (isset($_POST['username'])) {
     if ($row = mysqli_fetch_assoc($res)) {
         session_start();
         $_SESSION['roleName'] = $row['roleName'];
-        $_SESSION['userName'] = $userName;
+        $_SESSION['userName'] = $row['username'];
         $_SESSION['userId'] = $row['id'];
         $url = $row['role'] == 1 ? "admin.php" : "accounts.php?uid=" . $row['id'];
         header("Location: $url");
