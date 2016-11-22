@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,6 +33,20 @@
 </div>
 <div class="container">
     <h1>Users</h1>
+    <?php if (isset($_SESSION['newUserCreated'])) {
+        if ($_SESSION['newUserCreated']) { ?>
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Well done!</strong> New user has been successfully created.
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-error">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Error!</strong> New user hasn't been created.
+            </div>
+        <?php }
+        unset($_SESSION['newUserCreated']);
+    } ?>
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
@@ -55,8 +69,8 @@
                       u.last_name,
                       r.name AS role
                   FROM users u
-                      JOIN authorities a ON u.id = a.user_id
-                      JOIN roles r ON a.role_id = r.id";
+                      LEFT JOIN authorities a ON u.id = a.user_id
+                      LEFT JOIN roles r ON a.role_id = r.id";
         $res = mysqli_query($con, $query);
         while ($row = mysqli_fetch_assoc($res)) {
             $userId = $row['userid'];
@@ -85,12 +99,12 @@
         <button href="#" class="close" data-dismiss="modal">&times;</button>
         <h2 class="text-center">Create new user</h2>
     </div>
-    <div class="modal-body">
-        <form>
-            <div class="alert alert-error">
+    <form action="new_user.php" method="post">
+        <div class="modal-body">
+<!--            <div class="alert alert-error">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
                 <strong>Some field is invalid.</strong> Details.
-            </div>
+            </div>-->
             <label for="username">User name:</label>
             <input id="username" name="username" type="text" class="input-block-level" placeholder="User Name">
             <label for="first-name">First Name:</label>
@@ -104,11 +118,11 @@
                       placeholder="Description"></textarea>
             <label for="password">Password:</label>
             <input id="password" name="password" type="password" class="input-block-level" placeholder="Password">
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-large btn-block btn-primary" type="submit">Create</button>
-    </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-large btn-block btn-primary" type="submit">Create</button>
+        </div>
+    </form>
 </div>
 <script src="../web/js/jquery-1.12.4.min.js"></script>
 <script src="../web/js/bootstrap.min.js"></script>
