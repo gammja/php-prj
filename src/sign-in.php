@@ -16,7 +16,7 @@ if (isset($_POST['username'])) {
 
     $res = mysqli_query($con, $query);
     if ($row = mysqli_fetch_assoc($res)) {
-        if ($row['role'] == 1) {
+        if ($row['role'] == 1) { // 1 - admin
             $url = "admin.php";
         } else {
             $userId = $row['id'];
