@@ -1,3 +1,35 @@
+<?php
+$success = true;
+if (isset($_POST['username'])) {
+    include('connect.php');
+
+    $userName = $_POST['username'];
+    $password = $_POST['password'];
+
+    $query = "SELECT
+                  u.id,
+                  r.id AS role
+                FROM `php-prj`.users u
+                  JOIN `php-prj`.authorities a ON u.id = a.user_id
+                  JOIN `php-prj`.roles r ON a.role_id = r.id
+                WHERE u.username = '$userName' AND u.password = '$password'";
+
+    $res = mysqli_query($con, $query);
+    if ($row = mysqli_fetch_assoc($res)) {
+        if ($row['role'] == 1) {
+            $url = "admin.php";
+        } else {
+            $userId = $row['id'];
+            $url = "accounts.php?uid=$userId";
+        }
+        header("Location: $url");
+    } else {
+        $success = false;
+    }
+    mysqli_close($con);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,13 +47,14 @@
     </div>
 </div>
 <div class="container">
-    <form class="form-login" method="get" action="accounts.php">
+    <form class="form-login" method="post" action="sign-in.php">
         <h2 class="form-login-heading text-center">Sign In</h2>
-        <div class="alert alert-error">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            Your login attempt was not successful, try again.
-            <strong>Reason:</strong> Bad credentials.
-        </div>
+        <?php if (!$success) { ?>
+            <div class="alert alert-error">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                Your login attempt was not successful, try again. <strong>Reason:</strong> Bad credentials.
+            </div>
+        <?php } ?>
         <input name="username" type="text" class="input-block-level" placeholder="Username">
         <input name="password" type="password" class="input-block-level" placeholder="Password">
         <div class="row-fluid">

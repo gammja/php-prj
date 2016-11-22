@@ -15,7 +15,7 @@ INSERT INTO `php-prj`.`accounts` (`id`, `acc_num`, `description`, `user_id`) VAL
 INSERT INTO `php-prj`.`accounts` (`id`, `acc_num`, `description`, `user_id`) VALUES (3, '5524550248494633', 'description_3', 3);
 INSERT INTO `php-prj`.`accounts` (`id`, `acc_num`, `description`, `user_id`) VALUES (4, '1155744622468832', 'description_4', 3);
 
-INSERT INTO `php-prj`.`payments` (from_acc, to_acc, payment_time, amount, description, status) VALUES ('9784543829216754', '5524550248496754', now(), 10000, 'description_1', 1);
+INSERT INTO `php-prj`.`payments` (from_acc, to_acc, payment_time, amount, description, status) VALUES ('9784543829216754', '5524550248494633', now(), 10000, 'description_1', 1);
 INSERT INTO `php-prj`.`payments` (from_acc, to_acc, payment_time, amount, description, status) VALUES ('9784543829216754', '1155744622468832', now(), 20000, 'description_2', 1);
 INSERT INTO `php-prj`.`payments` (from_acc, to_acc, payment_time, amount, description, status) VALUES ('1155744622468832', '1234534859203456', now(), 3000, 'description_3', 1);
 INSERT INTO `php-prj`.`payments` (from_acc, to_acc, payment_time, amount, description, status) VALUES ('1155744622468832', '9784543829216754', now(), 4000, 'description_4', 1);
