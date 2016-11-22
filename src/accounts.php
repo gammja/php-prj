@@ -7,20 +7,6 @@ if (!isset($_GET['uid']) && !isset($_SESSION['userId'])) {
 }
 
 $userId = isset($_GET['uid']) ? $_GET['uid'] : $_SESSION['userId'];
-if (isset($_POST['account'])) {
-    include_once('connect.php');
-    $account = $_POST['account'];
-    $description = $_POST['description'];
-
-    $query = "INSERT INTO `php-prj`.accounts (`acc_num`, `description`, `user_id`) 
-              VALUES ('$account', '$description', $userId)";
-    if (mysqli_query($con, $query)) {
-        $created = true;
-    } else {
-        $error = mysqli_error($con);
-        $created = false;
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -58,8 +44,8 @@ if (isset($_POST['account'])) {
 </div>
 <div class="container">
     <h1>Accounts</h1>
-    <?php if (isset($created)) {
-        if ($created) { ?>
+    <?php if (isset($_SESSION['newAccCreated'])) {
+        if ($_SESSION['newAccCreated']) { ?>
             <div class="alert alert-success">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
                 <strong>Well done!</strong> New account has been successfully created.
@@ -67,9 +53,10 @@ if (isset($_POST['account'])) {
         <?php } else { ?>
             <div class="alert alert-error">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <strong>Error!</strong> New account hasn't been created. <?php echo $error; ?>
+                <strong>Error!</strong> New account hasn't been created.
             </div>
         <?php }
+        unset($_SESSION['newAccCreated']);
     } ?>
     <div>
         <a href="#create-new-account" class="btn btn-primary" data-toggle="modal">Create new account</a>
@@ -109,7 +96,7 @@ if (isset($_POST['account'])) {
         <button href="#" class="close" data-dismiss="modal">&times;</button>
         <h2 class="text-center">Create new account</h2>
     </div>
-    <form method="post" action="accounts.php">
+    <form method="post" action="new_account.php">
         <div class="modal-body">
             <!--<div class="alert alert-error">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
