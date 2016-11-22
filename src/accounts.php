@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_GET['uid'])) {
-    header('Location: sign-in.php');
+    header('Location: login.php');
     exit();
 }
 
@@ -20,7 +20,7 @@ if ($row = mysqli_fetch_assoc($res)){
     $userName = $row['username'];
     $role = strtoupper($row['role']);
 } else {
-    header('Location: sign-in.php');
+    header('Location: login.php');
     exit();
 }
 ?>
