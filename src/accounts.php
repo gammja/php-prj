@@ -71,7 +71,7 @@ $userId = isset($_GET['uid']) ? $_GET['uid'] : $_SESSION['userId'];
         </thead>
         <tbody>
         <?php
-        include_once('connect.php');
+        include('connect.php');
         include('helpers.php');
 
         $query = "SELECT acc_num, description FROM `php-prj`.accounts WHERE user_id = $userId";
