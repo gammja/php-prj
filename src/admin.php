@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,10 @@
             </ul>
             <ul class="nav pull-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown" data-toggle="dropdown">%UserName%[%Role%] <b class="caret"></b></a>
+                    <a href="#" class="dropdown" data-toggle="dropdown">
+                        <?php echo $_SESSION['userName'] . ' [' . strtoupper($_SESSION['roleName']) . ']'; ?>
+                        <b class="caret"></b>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Change password</a></li>
                         <li class="divider"></li>

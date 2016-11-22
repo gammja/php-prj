@@ -4,25 +4,7 @@ if (!isset($_GET['uid'])) {
     header('Location: login.php');
     exit();
 }
-
-$userId = $_GET['uid'];
-include_once('connect.php');
-
-$query = "SELECT
-              u.username,
-              r.name AS role
-            FROM `php-prj`.users u
-              JOIN `php-prj`.authorities a ON u.id = a.user_id
-              JOIN `php-prj`.roles r ON a.role_id = r.id
-            WHERE u.id = $userId";
-$res = mysqli_query($con, $query);
-if ($row = mysqli_fetch_assoc($res)){
-    $userName = $row['username'];
-    $role = strtoupper($row['role']);
-} else {
-    header('Location: login.php');
-    exit();
-}
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -39,12 +21,15 @@ if ($row = mysqli_fetch_assoc($res)){
         <div class="container">
             <a href="#" class="brand">PHP Application</a>
             <ul class="nav pull-left">
-                <li><a href="accounts.php?uid=<?php echo $userId ?>">My Accounts</a></li>
-                <li><a href="transactions.php?id=<?php echo $userId ?>">My Transactions</a></li>
+                <li><a href="accounts.php?uid=<?php echo $_GET['uid'] ?>">My Accounts</a></li>
+                <li><a href="transactions.php?uid=<?php echo $_GET['uid'] ?>">My Transactions</a></li>
             </ul>
             <ul class="nav pull-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown" data-toggle="dropdown"><?php echo "$userName [$role]"?><b class="caret"></b></a>
+                    <a href="#" class="dropdown" data-toggle="dropdown">
+                        <?php echo $_SESSION['userName'] . ' [' . strtoupper($_SESSION['roleName']) . ']'; ?>
+                        <b class="caret"></b>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Change password</a></li>
                         <li class="divider"></li>
@@ -74,10 +59,10 @@ if ($row = mysqli_fetch_assoc($res)){
         </thead>
         <tbody>
         <?php
-        include_once('connect.php');
-        include_once('helpers.php');
+        include('connect.php');
+        include('helpers.php');
 
-        $query = "SELECT acc_num, description FROM `php-prj`.accounts WHERE user_id = $userId";
+        $query = "SELECT acc_num, description FROM `php-prj`.accounts WHERE user_id = " . $_GET['uid'];
         $res = mysqli_query($con, $query);
         while ($row = mysqli_fetch_assoc($res)) {
             $account = $row['acc_num'];
