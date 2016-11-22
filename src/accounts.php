@@ -1,10 +1,26 @@
 <?php
+session_start();
 
-if (!isset($_GET['uid'])) {
+if (!isset($_GET['uid']) && !isset($_SESSION['userId'])) {
     header('Location: login.php');
     exit();
 }
-session_start();
+
+$userId = isset($_GET['uid']) ? $_GET['uid'] : $_SESSION['userId'];
+if (isset($_POST['account'])) {
+    include_once('connect.php');
+    $account = $_POST['account'];
+    $description = $_POST['description'];
+
+    $query = "INSERT INTO `php-prj`.accounts (`acc_num`, `description`, `user_id`) 
+              VALUES ('$account', '$description', $userId)";
+    if (mysqli_query($con, $query)) {
+        $created = true;
+    } else {
+        $error = mysqli_error($con);
+        $created = false;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +37,8 @@ session_start();
         <div class="container">
             <a href="#" class="brand">PHP Application</a>
             <ul class="nav pull-left">
-                <li><a href="accounts.php?uid=<?php echo $_GET['uid'] ?>">My Accounts</a></li>
-                <li><a href="transactions.php?uid=<?php echo $_GET['uid'] ?>">My Transactions</a></li>
+                <li><a href="accounts.php?uid=<?php echo $userId ?>">My Accounts</a></li>
+                <li><a href="transactions.php?uid=<?php echo $userId ?>">My Transactions</a></li>
             </ul>
             <ul class="nav pull-right">
                 <li class="dropdown">
@@ -42,10 +58,19 @@ session_start();
 </div>
 <div class="container">
     <h1>Accounts</h1>
-    <div class="alert alert-success">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong>Well done!</strong> New account has been successfully created.
-    </div>
+    <?php if (isset($created)) {
+        if ($created) { ?>
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Well done!</strong> New account has been successfully created.
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-error">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Error!</strong> New account hasn't been created. <?php echo $error; ?>
+            </div>
+        <?php }
+    } ?>
     <div>
         <a href="#create-new-account" class="btn btn-primary" data-toggle="modal">Create new account</a>
     </div>
@@ -59,10 +84,10 @@ session_start();
         </thead>
         <tbody>
         <?php
-        include('connect.php');
+        include_once('connect.php');
         include('helpers.php');
 
-        $query = "SELECT acc_num, description FROM `php-prj`.accounts WHERE user_id = " . $_GET['uid'];
+        $query = "SELECT acc_num, description FROM `php-prj`.accounts WHERE user_id = $userId";
         $res = mysqli_query($con, $query);
         while ($row = mysqli_fetch_assoc($res)) {
             $account = $row['acc_num'];
@@ -84,20 +109,22 @@ session_start();
         <button href="#" class="close" data-dismiss="modal">&times;</button>
         <h2 class="text-center">Create new account</h2>
     </div>
-    <div class="modal-body">
-        <form>
-            <div class="alert alert-error">
+    <form method="post" action="accounts.php">
+        <div class="modal-body">
+            <!--<div class="alert alert-error">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
                 <strong>Account Number is invalid.</strong> Please specify exactly 16 digits.
                 All numerical, no spaces or dashes.
-            </div>
-            <input name="account" type="text" class="input-block-level" placeholder="Primary Account Number*">
+            </div>-->
+            <input name="account" type="text" pattern="\d*" maxlength="16"
+                   title="Please specify exactly 16 digits. All numerical, no spaces or dashes."
+                   class="input-block-level" placeholder="Primary Account Number*">
             <textarea name="description" class="input-block-level" rows="6" placeholder="Description"></textarea>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-large btn-block btn-primary" type="submit">Create</button>
-    </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-large btn-block btn-primary" type="submit">Create</button>
+        </div>
+    </form>
 </div>
 <script src="../web/js/jquery-1.12.4.min.js"></script>
 <script src="../web/js/bootstrap.min.js"></script>
