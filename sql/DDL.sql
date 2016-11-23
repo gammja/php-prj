@@ -50,6 +50,7 @@ CREATE TABLE `php-prj`.`roles` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `description` VARCHAR(200) NULL,
+  `is_default` BOOL DEFAULT 0 NOT NULL,
   PRIMARY KEY (`id`));
 
 CREATE TABLE `php-prj`.`authorities` (

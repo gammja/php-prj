@@ -101,10 +101,10 @@
     </div>
     <form action="new_user.php" method="post">
         <div class="modal-body">
-<!--            <div class="alert alert-error">
-                <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <strong>Some field is invalid.</strong> Details.
-            </div>-->
+            <!--            <div class="alert alert-error">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong>Some field is invalid.</strong> Details.
+                        </div>-->
             <label for="username">User name:</label>
             <input id="username" name="username" type="text" class="input-block-level" placeholder="User Name">
             <label for="first-name">First Name:</label>
@@ -116,6 +116,19 @@
             <label for="description">Description:</label>
             <textarea id="description" name="description" class="input-block-level" rows="6"
                       placeholder="Description"></textarea>
+            <label for="role">Role:</label>
+            <select name="role" id="role">
+                <?php
+                include('connect.php');
+
+                $query = "SELECT id, name, is_default FROM `php-prj`.roles";
+                $res = mysqli_query($con, $query);
+                while ($row = mysqli_fetch_assoc($res)) {
+                    echo "<option value='" . $row['id'] . "'" . ($row['is_default'] ? " selected": "") . ">"
+                        . strtoupper($row['name']) . "</option>";
+                }
+                ?>
+            </select>
             <label for="password">Password:</label>
             <input id="password" name="password" type="password" class="input-block-level" placeholder="Password">
         </div>
