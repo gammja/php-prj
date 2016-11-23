@@ -6,6 +6,26 @@
     <title>PHP Application</title>
     <link rel="stylesheet" href="../web/css/bootstrap.min.css">
     <link rel="stylesheet" href="../web/css/application.css">
+    <script src="../web/js/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+                $('#new-user-form').validate({
+                    rules: {
+                        username: {
+                            minLength: 2,
+                            required: true
+                        }
+                    }
+                    highlight: function (element) {
+                        $(element).closest('.control-group').removeClass('success').addClass('error');
+                    }
+                    success: function (element) {
+                        element.text('OK!').addClass('valid').closest('.control-group').removeClass('error').addClass('success');
+                    }
+                });
+            }
+        );
+    </script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse">
@@ -99,14 +119,16 @@
         <button href="#" class="close" data-dismiss="modal">&times;</button>
         <h2 class="text-center">Create new user</h2>
     </div>
-    <form action="new_user.php" method="post">
+    <form id="new-user-form" action="new_user.php" method="post">
         <div class="modal-body">
             <!--            <div class="alert alert-error">
                             <a href="#" class="close" data-dismiss="alert">&times;</a>
                             <strong>Some field is invalid.</strong> Details.
                         </div>-->
-            <label for="username">User name:</label>
-            <input id="username" name="username" type="text" class="input-block-level" placeholder="User Name">
+            <div class="control-group">
+                <label for="username">User name:</label>
+                <input id="username" name="username" type="text" class="input-block-level" placeholder="User Name">
+            </div>
             <label for="first-name">First Name:</label>
             <input id="first-name" name="first-name" type="text" class="input-block-level" placeholder="First Name">
             <label for="last-name">Last Name:</label>
@@ -124,7 +146,7 @@
                 $query = "SELECT id, name, is_default FROM `php-prj`.roles";
                 $res = mysqli_query($con, $query);
                 while ($row = mysqli_fetch_assoc($res)) {
-                    echo "<option value='" . $row['id'] . "'" . ($row['is_default'] ? " selected": "") . ">"
+                    echo "<option value='" . $row['id'] . "'" . ($row['is_default'] ? " selected" : "") . ">"
                         . strtoupper($row['name']) . "</option>";
                 }
                 ?>

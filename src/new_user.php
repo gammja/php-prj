@@ -6,7 +6,7 @@ $firstName = $_POST['first-name'];
 $lastName = $_POST['last-name'];
 $email = $_POST['email'];
 $description = $_POST['description'];
-$password = $_POST['password'];
+$pass = $_POST['password'];
 $role = $_POST['role'];
 
 include('connect.php');
@@ -14,7 +14,7 @@ include('connect.php');
 mysqli_begin_transaction($con);
 
 $query = "INSERT INTO `php-prj`.users (`username`, `password`, `email`, `description`, `first_name`, `last_name`) 
-              VALUES ('$userName', '$password', '$email', '$description', '$firstName', '$lastName')";
+              VALUES ('$userName', '$pass', '$email', '$description', '$firstName', '$lastName')";
 
 $_SESSION['newUserCreated'] = mysqli_query($con, $query) or die(mysqli_error($con));
 
