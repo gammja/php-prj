@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="MySQL - php-prj@192.168.99.100">
+<dataSource name="MySQL - php-prj@localhost">
   <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
-    <schema id="1" name="information_schema"/>
-    <schema id="2" name="mysql"/>
-    <schema id="3" name="performance_schema"/>
-    <schema id="4" name="sys"/>
-    <schema id="5" name="php-prj">
+    <schema id="1" name="php-prj">
       <visible>1</visible>
     </schema>
-    <table id="6" parent="5" name="accounts"/>
-    <table id="7" parent="5" name="authorities"/>
-    <table id="8" parent="5" name="payments"/>
-    <table id="9" parent="5" name="roles"/>
-    <table id="10" parent="5" name="users"/>
+    <schema id="2" name="information_schema"/>
+    <schema id="3" name="mysql"/>
+    <schema id="4" name="performance_schema"/>
+    <schema id="5" name="sys"/>
+    <table id="6" parent="1" name="accounts"/>
+    <table id="7" parent="1" name="authorities"/>
+    <table id="8" parent="1" name="payments"/>
+    <table id="9" parent="1" name="roles"/>
+    <table id="10" parent="1" name="users"/>
     <column id="11" parent="6" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
@@ -178,7 +178,6 @@ role_id</columns>
       <data-type>varchar(50)|0</data-type>
     </column>
     <column id="48" parent="10" name="email">
-      <mandatory>1</mandatory>
       <data-type>varchar(50)|0</data-type>
     </column>
     <column id="49" parent="10" name="description">

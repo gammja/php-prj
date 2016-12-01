@@ -3,7 +3,7 @@ INSERT INTO `php-prj`.`users` (`id`, `username`, `password`, `email`, `descripti
 INSERT INTO `php-prj`.`users` (`id`, `username`, `password`, `email`, `description`, `first_name`, `last_name`) VALUES (3, 'test2', 'test2', 'test2@none.com', 'description_3', 'test2', 'test2');
 
 INSERT INTO `php-prj`.`roles` (`id`, `name`, `description`) VALUES (1, 'admin', 'Admin');
-INSERT INTO `php-prj`.`roles` (`id`, `name`, `description`) VALUES (2, 'user', 'User');
+INSERT INTO `php-prj`.`roles` (`id`, `name`, `description`, `is_default`) VALUES (2, 'user', 'User', 1);
 
 INSERT INTO `php-prj`.`authorities` (`user_id`, `role_id`) VALUES (1, 1);
 INSERT INTO `php-prj`.`authorities` (`user_id`, `role_id`) VALUES (2, 2);

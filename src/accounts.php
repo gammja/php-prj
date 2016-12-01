@@ -105,8 +105,8 @@ $userId = isset($_GET['uid']) ? $_GET['uid'] : $_SESSION['userId'];
             </div>-->
             <input name="account" type="text" pattern="\d*" maxlength="16"
                    title="Please specify exactly 16 digits. All numerical, no spaces or dashes."
-                   class="input-block-level" placeholder="Primary Account Number*">
-            <textarea name="description" class="input-block-level" rows="6" placeholder="Description"></textarea>
+                   class="input-block-level" placeholder="Primary Account Number*" required>
+            <textarea name="description" class="input-block-level" rows="6" placeholder="Description" required></textarea>
         </div>
         <div class="modal-footer">
             <button class="btn btn-large btn-block btn-primary" type="submit">Create</button>

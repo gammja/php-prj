@@ -6,25 +6,6 @@
     <title>PHP Application</title>
     <link rel="stylesheet" href="../web/css/bootstrap.min.css">
     <link rel="stylesheet" href="../web/css/application.css">
-    <script src="../web/js/jquery.validate.min.js"></script>
-    <script>
-        $(document).ready(function () {
-                $('#new-user-form').validate({
-                    rules: {
-                        username: {
-                            minLength: 2,
-                            required: true
-                        }
-                    },
-                    highlight: function (element) {
-                        $(element).closest('.control-group').removeClass('success').addClass('error');
-                    },
-                    success: function (element) {
-                        element.text('OK!').addClass('valid').closest('.control-group').removeClass('error').addClass('success');
-                    }
-                });
-            });
-    </script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse">
@@ -126,19 +107,19 @@
                         </div>-->
             <div class="control-group">
                 <label for="username">User name:</label>
-                <input id="username" name="username" type="text" class="input-block-level" placeholder="User Name">
+                <input id="username" name="username" type="text" class="input-block-level" placeholder="User Name" minlength="2" required>
             </div>
             <label for="first-name">First Name:</label>
             <input id="first-name" name="first-name" type="text" class="input-block-level" placeholder="First Name">
             <label for="last-name">Last Name:</label>
             <input id="last-name" name="last-name" type="text" class="input-block-level" placeholder="Last Name">
             <label for="email">Email:</label>
-            <input id="email" name="email" type="email" class="input-block-level" placeholder="Email">
+            <input id="email" name="email" type="email" class="input-block-level" placeholder="Email" required>
             <label for="description">Description:</label>
             <textarea id="description" name="description" class="input-block-level" rows="6"
                       placeholder="Description"></textarea>
             <label for="role">Role:</label>
-            <select name="role" id="role">
+            <select name="role" id="role" required>
                 <?php
                 include('connect.php');
 

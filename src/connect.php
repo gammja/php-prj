@@ -1,7 +1,7 @@
 <?php
 
-$host = "192.168.99.100";
-$port = 32770;
+$host = "127.0.0.1";
+$port = 60000;
 $user = "root";
 $password = "";
 $dbname = "php-prj";
