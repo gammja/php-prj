@@ -13,8 +13,6 @@
   },
   "require": {
     "php": ">= 5.3.3",
-    "components/jquery": "1.8.3",
-    "components/jqueryui": "1.10.2",
-    "twitter/bootstrap": "v2.2.2"
+    "symfony/framework-standard-edition": "2.8.*"
   }
 }
